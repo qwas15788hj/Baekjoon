@@ -1,0 +1,24 @@
+from itertools import permutations
+def solution(numbers):
+    answer = 0
+    arr = []
+    
+    for i in range(1, len(numbers)+1):
+        nums = list(permutations(numbers, i))
+        for num in nums:
+            num = list(num)
+            num = "".join(num)
+            arr.append(int(num))
+            
+    arr = list(set(arr))
+    arr.sort()
+    
+    for i in arr:
+        if i > 1:
+            for j in range(2, int(i**0.5)+1):
+                if i%j == 0:
+                    break
+            else:
+                answer += 1
+    
+    return answer
