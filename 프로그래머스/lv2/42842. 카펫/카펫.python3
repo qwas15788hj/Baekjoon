@@ -1,7 +1,7 @@
 def solution(brown, yellow):
     answer = []
     
-    for x in range(3, 10000):
+    for x in range(3, 5000):
         for y in range(3, x+1):
             if (x-2)*(y-2) == yellow and x*y-yellow == brown:
                 answer.append(x)
