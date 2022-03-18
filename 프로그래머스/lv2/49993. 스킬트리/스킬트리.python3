@@ -21,7 +21,6 @@ def solution(skill, skill_trees):
                 p += 1
 
         if len(skill_trees_h) == 0:
-            print(tree)
             answer += 1
         
     return answer
