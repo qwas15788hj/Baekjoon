@@ -1,0 +1,27 @@
+import heapq
+def solution(skill, skill_trees):
+    answer = 0
+    skill_h = []
+    
+    for i in range(len(skill)):
+        heapq.heappush(skill_h, (i, skill[i]))
+    
+    for tree in skill_trees:
+        skill_trees_h = []
+        for i in range(len(tree)):
+            if tree[i] in skill:
+                heapq.heappush(skill_trees_h, (i, tree[i]))
+
+        p = 0
+        while len(skill_trees_h) != 0:
+            if skill_trees_h[0][1] != skill_h[p][1]:
+                break
+            else:
+                heapq.heappop(skill_trees_h)
+                p += 1
+
+        if len(skill_trees_h) == 0:
+            print(tree)
+            answer += 1
+        
+    return answer
