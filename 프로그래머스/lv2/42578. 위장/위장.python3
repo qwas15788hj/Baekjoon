@@ -1,0 +1,13 @@
+from collections import defaultdict
+
+def solution(clothes):
+    answer = 1
+    spy = defaultdict(set)
+    
+    for clothe in clothes:
+        spy[clothe[1]].add(clothe[0])
+
+    for i in spy.keys():
+        answer *= len(spy[i])+1
+        
+    return answer-1
