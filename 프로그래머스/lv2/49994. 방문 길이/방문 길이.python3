@@ -1,0 +1,24 @@
+def solution(dirs):
+    answer = 0
+    visited = set()
+    
+    x, y = 0, 0
+    dx = [0, 0, -1, 1]
+    dy = [-1, 1, 0, 0]
+    move = ['L', 'R', 'U', 'D']
+    
+    for di in dirs:
+        for i in range(4):
+            if di == move[i]:
+                nx = x + dx[i]
+                ny = y + dy[i]
+        if nx < -5 or nx > 5 or ny < -5 or ny > 5:
+            continue
+        if (x, y, nx, ny) not in visited:
+            visited.add((x, y, nx, ny))
+            visited.add((nx, ny, x, y))
+            answer += 1
+            
+        x, y = nx, ny
+
+    return answer
