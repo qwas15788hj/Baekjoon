@@ -7,7 +7,8 @@ def solution(n,a,b):
             break
         a = int((a+1)/2)
         b = int((b+1)/2)
-        
+    
+    # a, b가 1차이지만 안 만날때 ex) 4, 5 => 다다음에 만남
     while True:
         if max(a, b)%2 != 0:
             a = int((a+1)/2)
