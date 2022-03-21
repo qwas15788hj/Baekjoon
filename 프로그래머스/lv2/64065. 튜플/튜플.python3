@@ -1,0 +1,30 @@
+def solution(s):
+    answer = []
+    list_s = []
+    
+    s = s[:len(s)-1].replace('{', '')
+    for i in s.split('}'):
+        arr = []
+        for j in i.split(','):
+            arr.append(j)
+        list_s.append(arr)
+    
+    for i in list_s:
+        for j in i:
+            if j == '':
+                i.remove(j)
+                
+    result = []
+    for i in list_s[:-1]:
+        result.append(list(map(int, i)))
+        
+    result.sort(key=len)
+    
+    store = [-1]
+    for i in result:
+        for j in i:
+            if j not in store:
+                answer.append(j)
+        store = i
+        
+    return answer
