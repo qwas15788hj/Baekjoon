@@ -1,0 +1,21 @@
+from itertools import product
+def solution(word):
+    answer = 0
+    alpha = ['A', 'E', 'I', 'O', 'U']
+    result = []
+    for i in range(1, len(alpha)+1):
+        li = list(product(alpha, repeat=i))
+        for l in li:
+            a = ""
+            for k in l:
+                a += k
+            result.append(a)
+        
+    result.sort()
+    
+    for i in range(len(result)):
+        if result[i] == word:
+            answer = i+1
+            break
+            
+    return answer
