@@ -1,6 +1,5 @@
 def solution(n, words):
     answer = []
-    count = 0
     num = 0
     word = set()
     word.add(words[0])
