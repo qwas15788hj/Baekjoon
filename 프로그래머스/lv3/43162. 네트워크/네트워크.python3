@@ -1,0 +1,24 @@
+def dfs(graph, v, visited):
+    visited[v] = True
+    for i in graph[v]:
+        if not visited[i]:
+            dfs(graph, i, visited)
+
+def solution(n, computers):
+    answer = 0
+    graph = [[] for _ in range(n)]
+    visited = [False] * (n)
+    
+    for i in range(len(computers)):
+        for j in range(len(computers[i])):
+            if i != j and computers[i][j] == 1:
+                graph[i].append(j)
+    
+    for i in range(n):
+        if visited[i] == False:
+            answer += 1
+            dfs(graph, i, visited)
+        else:
+            pass
+    
+    return answer
