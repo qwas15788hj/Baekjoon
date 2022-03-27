@@ -1,0 +1,44 @@
+def nota(n, q):
+    rev_base = ''
+    if n == 0:
+        return '0'
+    
+    while n > 0:
+        n, mod = divmod(n, q)
+        if mod == 10:
+            mod = 'A'
+        elif mod == 11:
+            mod = 'B'
+        elif mod == 12:
+            mod = 'C'
+        elif mod == 13:
+            mod = 'D'
+        elif mod == 14:
+            mod = 'E'
+        elif mod == 15:
+            mod = 'F'
+        rev_base += str(mod)
+        
+    return rev_base[::-1]
+
+def solution(n, t, m, p):
+    answer = ''
+    num = 0
+    turn = 0
+
+    while True:
+        a = nota(num, n)
+        for i in range(len(a)):
+            if (turn+i)%m == p-1:
+                answer += a[i]
+                
+        if len(answer) >= t:
+            break
+            
+        num += 1
+        turn = (turn+len(a))%m
+    
+    if len(answer) != t:
+        return answer[:t]
+    
+    return answer
