@@ -1,0 +1,29 @@
+def solution(str1, str2):
+    answer = 0
+    a = []
+    b = []
+    inter = 0
+    union = 0
+    
+    for i in range(len(str1)-1):
+        if str1[i].isalpha() == True and str1[i+1].isalpha() == True:
+            a.append(str1[i].lower()+str1[i+1].lower())
+            
+    for i in range(len(str2)-1):
+        if str2[i].isalpha() == True and str2[i+1].isalpha() == True:
+            b.append(str2[i].lower()+str2[i+1].lower())
+    
+    c = list(set(a)|set(b))
+    
+    for i in c:
+        union += max(a.count(i), b.count(i))
+        inter += min(a.count(i), b.count(i))
+
+    if inter == 0:
+        answer = 0
+    if union == 0:
+        answer = 65536
+    else:
+        answer = int(inter/union*65536)
+    
+    return answer
