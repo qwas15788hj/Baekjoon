@@ -1,0 +1,16 @@
+from itertools import permutations
+
+def solution(k, dungeons):
+    answer = 0
+    dungeon = list(permutations(dungeons, len(dungeons)))
+    
+    for dun in dungeon:
+        tired = k
+        result = 0
+        for d in dun:
+            if tired >= d[0]:
+                tired -= d[1]
+                result += 1
+        answer = max(answer, result)
+        
+    return answer
