@@ -1,0 +1,16 @@
+def solution(n, s):    
+    answer = []
+    a = s//n
+    b = s%n
+    
+    if a == 0:
+        answer.append(-1)
+        return answer
+    
+    answer = [a for _ in range(n)]
+    
+    for i in range(b):
+        answer[i] += 1
+    answer.sort()
+    
+    return answer
