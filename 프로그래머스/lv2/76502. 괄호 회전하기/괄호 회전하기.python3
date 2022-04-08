@@ -1,0 +1,38 @@
+def solution(s):
+    answer = 0
+    
+    for j in range(len(s)):
+        s = s[1:len(s)]+s[0]
+        stack = []
+        
+        for i in s:
+            if i == '(' or i == '[' or i == '{':
+                stack.append(i)
+            else:
+                if len(stack) == 0:
+                    stack.append('0')
+                    break
+                else:
+                    if i == ')':
+                        if stack[-1] == '(':
+                            stack.pop()
+                        else:
+                            stack.append('0')
+                            break
+                    if i == ']':
+                        if stack[-1] == '[':
+                            stack.pop()
+                        else:
+                            stack.append('0')
+                            break
+                    if i == '}':
+                        if stack[-1] == '{':
+                            stack.pop()
+                        else:
+                            stack.append('0')
+                            break
+
+        if len(stack) == 0:
+            answer += 1
+
+    return answer
