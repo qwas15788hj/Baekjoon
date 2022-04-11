@@ -8,13 +8,15 @@ def solution(files):
         num = ""
         count = 0
         tail = ""
+        # head 찾기
         for j in range(len(files[i])):
             if files[i][j].isdigit() == True:
                 break
             else:
                 h += files[i][j].lower()
         file_sort.append(h)
-            
+        
+        # number 찾기
         for z in range(j, len(files[i])):
             if files[i][z].isdigit() == True and len(num) < 6:
                 num += files[i][z]
@@ -22,19 +24,17 @@ def solution(files):
                 break
         file_sort.append(int(num))
         
+        # tail 찾기
         for t in range(z, len(files[i])):
             tail += files[i][t]
-        
         file_sort.append(tail)
+        
         file_sort.append(i)
-        
         answer.append(file_sort)
-        
         
     answer.sort(key=lambda x:(x[0], x[1], x[3]))
         
     for i in answer:
         result.append(files[i[3]])
         
-    
     return result
