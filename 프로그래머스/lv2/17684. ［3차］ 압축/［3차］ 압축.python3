@@ -1,0 +1,29 @@
+def solution(msg):
+    words = [chr(i) for i in range(65, 91)]
+    answer = []
+    
+    if len(msg) == 1:
+        answer.append(words.index(msg[0])+1)
+    else:
+        i = 0
+        while True:
+            now = msg[i]
+            pre = msg[i+1]
+            while now + pre in words:
+                now += pre
+                i += 1
+                if i+1 >= len(msg):
+                    pre = ""
+                    break
+                else:
+                    pre = msg[i+1]
+            answer.append(words.index(now)+1)
+            words.append(now + pre)
+            i += 1
+            if i+1 == len(msg) or pre == "":
+                break
+
+        if pre != "":
+            answer.append(words.index(pre)+1)
+
+    return answer
