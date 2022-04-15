@@ -1,0 +1,33 @@
+import math
+def solution(fees, records):
+    answer = []
+    in_car = [-1]*10000
+    total = [0]*10000
+    time = []
+    
+    for record in records:
+        h = int(record.split()[0][0]+record.split()[0][1])*60
+        m = int(record.split()[0][3]+record.split()[0][4])
+        if record.split()[2] == 'IN':
+            in_car[int(record.split()[1])] = h+m
+        else:
+            total[int(record.split()[1])] += h+m-in_car[int(record.split()[1])]
+            in_car[int(record.split()[1])] = -1
+    
+    for i in range(len(in_car)):
+        if in_car[i] != -1:
+            total[i] += 1439-in_car[i]
+    
+    for i in total:
+        if i != 0:
+            time.append(i)
+    
+    for i in time:
+        if i > fees[0]:
+            answer.append(fees[1] + math.ceil((i-fees[0])/fees[2])*fees[3])
+        else:
+            answer.append(fees[1])
+    
+    return answer
+
+
