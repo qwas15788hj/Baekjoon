@@ -1,0 +1,11 @@
+def solution(numbers):
+    answer = ''
+    
+    numbers.sort(key=lambda x:str(x)*4)
+    for i in range(len(numbers)-1, -1, -1):
+        answer += str(numbers[i])
+    
+    if int(answer) == 0:
+        answer = '0'
+    
+    return answer
