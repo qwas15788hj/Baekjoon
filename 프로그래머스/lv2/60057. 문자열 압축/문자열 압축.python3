@@ -5,7 +5,7 @@ def solution(s):
         pre = s[:i]
         count = 0
         word = ""
-        for j in range(0, len(s)+i, i): # len(s)까지만 해도 되는데 마지막 1번 더해서 예외처리
+        for j in range(0, len(s)+i, i):
             now = s[j:j+i]
             if pre == now:
                 count += 1
