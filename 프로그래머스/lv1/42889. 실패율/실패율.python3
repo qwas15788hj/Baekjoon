@@ -1,0 +1,20 @@
+def solution(N, stages):
+    answer = []
+    fail_list = []
+    
+    arr = [0]*(N+2)
+    for i in stages:
+        arr[i] += 1
+        
+    for i in range(1, len(arr)-1):
+        count = 0
+        if arr[i] != 0:
+            count = arr[i]/sum(arr[i:])
+        fail_list.append((i, count))
+    
+    fail_list.sort(key=lambda x:(-x[1], x[0]))
+    
+    for i in fail_list:
+        answer.append(i[0])
+    
+    return answer
