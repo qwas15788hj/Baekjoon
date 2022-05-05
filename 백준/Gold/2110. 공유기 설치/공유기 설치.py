@@ -1,26 +1,29 @@
 import sys
-n, c = map(int, sys.stdin.readline().split())
-array = []
+input = sys.stdin.readline
+
+n, c = map(int, input().split())
+arr = []
 for _ in range(n):
-    array.append(int(sys.stdin.readline()))
-array.sort()
+    arr.append(int(input()))
+arr.sort()
 
-start = 1
-end = array[-1] - array[0]
-result = 0
+start = 1 # min_gap
+end = arr[-1]-arr[0] # max_gap
 
+answer = 0 # last_gap
 while start <= end:
-    mid = (start+end) // 2
-    value = array[0]
+    mid = (start+end)//2
+    value = arr[0]
     count = 1
     for i in range(1, n):
-        if array[i] >= value + mid:
-            value = array[i]
+        if arr[i] >= value+mid:
+            value = arr[i]
             count += 1
+
     if count >= c:
-        start = mid + 1
-        result = mid
+        start = mid+1
+        answer = mid
     else:
-        end = mid - 1
-        
-print(result)
+        end = mid-1
+
+print(answer)
