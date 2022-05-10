@@ -1,0 +1,26 @@
+import heapq
+
+def solution(operations):
+    answer = []
+    heap = []
+    for op in operations:
+        if op.split()[0] == 'I':
+            heapq.heappush(heap, int(op.split()[1]))
+        else: # 'D'면
+            if len(heap) == 0:
+                pass
+            else:
+                if op.split()[1] == '1':
+                    num = max(heap)
+                    heap.remove(num)
+                else:
+                    heapq.heappop(heap)
+	
+    if len(heap) == 0:
+        answer.append(0)
+        answer.append(0)
+    else:
+        answer.append(max(heap))
+        answer.append(min(heap))
+    
+    return answer
