@@ -1,9 +1,10 @@
 from itertools import combinations_with_replacement
 
 n, m = map(int, input().split())
-arr = list(map(int, input().split()))
-arr.sort()
-li = list(combinations_with_replacement(arr, m))
-li.sort()
-for i in li:
+data = list(map(int, input().split()))
+data.sort()
+a = list(combinations_with_replacement(data, m))
+a.sort()
+
+for i in a:
     print(*i)
