@@ -1,9 +1,11 @@
 from itertools import permutations
 
 n, m = map(int, input().split())
-arr = list(map(int, input().split()))
-answer = list(permutations(arr, m))
-answer = list(set(answer))
-answer.sort()
-for i in answer:
+data = list(map(int, input().split()))
+data.sort()
+a = list(permutations(data, m))
+a = list(set(a))
+a.sort()
+
+for i in a:
     print(*i)
