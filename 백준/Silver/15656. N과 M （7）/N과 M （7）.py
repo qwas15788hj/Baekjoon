@@ -1,8 +1,10 @@
 from itertools import product
 
 n, m = map(int, input().split())
-arr = list(map(int, input().split()))
-li = list(product(arr, repeat=m))
-li.sort()
-for i in li:
+data = list(map(int, input().split()))
+data.sort()
+a = list(product(data, repeat=m))
+a.sort()
+
+for i in a:
     print(*i)
