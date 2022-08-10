@@ -11,6 +11,7 @@ public class Main {
 	static int[][] arr;
 	static int[][] changeArr;
 //	static ArrayList<Integer> type = new ArrayList<>();
+//	static int Xhalf, Yhalf; // 세로반, 가로반, 3, 4
 	static StringBuilder sb = new StringBuilder();
 	public static void main(String[] args) throws IOException {
 		
@@ -32,7 +33,11 @@ public class Main {
 		for(int i=0; i<r; i++) {
 			type[i] = Integer.parseInt(st.nextToken());
 		}
-//		System.out.println(Arrays.toString(type));
+		
+//		while(st.hasMoreTokens()) {
+//			type.add(Integer.parseInt(st.nextToken()));
+//		} //입력 완료
+//		type1();
 		for(int i=0; i<r; i++) {
 			switch(type[i]) {
 			case 1:
@@ -68,23 +73,46 @@ public class Main {
 	}//main
 
 	public static void type1() {
-		int[][] changeArr = new int[n][m];
-		for(int i=0; i<n; i++) {
+		changeArr = new int[n][m];
+		int line = n-1;
+		int Xhalf = n/2;
+		int Yhalf = m/2;
+		for(int i=0; i<Xhalf; i++) {
 			for(int j=0; j<m; j++) {
-				changeArr[n-i-1][j] = arr[i][j];
+				changeArr[i+line][j] = arr[i][j];
 			}
+			line-=2;
 		}
 		
+		line = -1;
+		for(int i=Xhalf; i<n; i++) {
+			for(int j=0; j<m; j++) {
+				changeArr[i+line][j] = arr[i][j];
+			}
+			line-=2;
+		}
 		arr = changeArr;
 		
 	}//type1
 	
 	public static void type2() {
 		changeArr = new int[n][m];
-		for(int i=0; i<n; i++) {
-			for(int j=0; j<m; j++) {
-				changeArr[i][m-j-1] = arr[i][j];
+		int Xhalf = n/2;
+		int Yhalf = m/2;
+		int line = m-1;
+		for(int i=0; i<Yhalf; i++) {
+			for(int j=0; j<n; j++) {
+				changeArr[j][i+line] = arr[j][i];
 			}
+			line-=2;
+		}
+		
+		line = -1;
+		for(int i=Yhalf; i<m; i++) {
+			for(int j=0; j<n; j++) {
+				changeArr[j][i+line] = arr[j][i];
+			}
+			line-=2;
 		}
 		arr = changeArr;
 		
@@ -92,13 +120,10 @@ public class Main {
 	
 	public static void type3() {
 		changeArr = new int[m][n];
-		
-		int col = n-1;
 		for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
-				changeArr[j][col] = arr[i][j];
+				changeArr[j][n-1-i] = arr[i][j];
 			}
-			col--;
 		}
 		int temp = n;
 		n = m;
@@ -126,25 +151,22 @@ public class Main {
 		int Yhalf = m/2;
 		for(int i=0; i<Xhalf; i++) {
 			for(int j=0; j<Yhalf; j++) {
-				changeArr[i][Yhalf+j] = arr[i][j];
+				changeArr[i][j] = arr[i+Xhalf][j];
 			}
 		}
 		for(int i=0; i<Xhalf; i++) {
 			for(int j=Yhalf; j<m; j++) {
-				changeArr[Xhalf+i][j] = arr[i][j];
+				changeArr[i][j] = arr[i][j-Yhalf];
 			}
 		}
 		for(int i=Xhalf; i<n; i++) {
-			int col = 0;
-			for(int j=Yhalf; j<m; j++, col++) {
-				changeArr[i][col] = arr[i][j];
+			for(int j=0; j<Yhalf; j++) {
+				changeArr[i][j] = arr[i][j+Yhalf];
 			}
 		}
-		
-		int row = 0;
-		for(int i=Xhalf; i<n; i++, row++) {
-			for(int j=0; j<Yhalf; j++) {
-				changeArr[row][j] = arr[i][j];
+		for(int i=Xhalf; i<n; i++) {
+			for(int j=Yhalf; j<m; j++) {
+				changeArr[i][j] = arr[i-Xhalf][j];
 			}
 		}
 		arr = changeArr;
@@ -157,24 +179,22 @@ public class Main {
 		int Yhalf = m/2;
 		for(int i=0; i<Xhalf; i++) {
 			for(int j=0; j<Yhalf; j++) {
-				changeArr[i+Xhalf][j] = arr[i][j];
+				changeArr[i][j] = arr[i][j+Yhalf];
+			}
+		}
+		for(int i=0; i<Xhalf; i++) {
+			for(int j=Yhalf; j<m; j++) {
+				changeArr[i][j] = arr[i+Xhalf][j];
 			}
 		}
 		for(int i=Xhalf; i<n; i++) {
 			for(int j=0; j<Yhalf; j++) {
-				changeArr[i][Yhalf+j] = arr[i][j];
+				changeArr[i][j] = arr[i-Xhalf][j];
 			}
 		}
-		int row = 0;
-		for(int i=Xhalf; i<n; i++, row++) {
+		for(int i=Xhalf; i<n; i++) {
 			for(int j=Yhalf; j<m; j++) {
-				changeArr[row][j] = arr[i][j];
-			}
-		}
-		for(int i=0; i<Xhalf; i++) {
-			int col = 0;
-			for(int j=Yhalf; j<m; j++, col++) {
-				changeArr[i][col] = arr[i][j];
+				changeArr[i][j] = arr[i][j-Yhalf];
 			}
 		}
 		arr = changeArr;
