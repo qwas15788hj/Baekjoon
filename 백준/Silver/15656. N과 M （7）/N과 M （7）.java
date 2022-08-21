@@ -1,52 +1,48 @@
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
 	
-	static int n, m, count=0;
+	static int n, m;
 	static int[] arr;
-	static int[] store;
+	static int[] numbers;
 	static StringBuilder sb = new StringBuilder();
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
-		Scanner sc = new Scanner(System.in);
-		n = sc.nextInt();
-		m = sc.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
 		arr = new int[n];
-		store = new int[m];
+		numbers = new int[m];
+		st = new StringTokenizer(br.readLine());
 		for(int i=0; i<n; i++) {
-			arr[i] = sc.nextInt();
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		Arrays.sort(arr);
 		
-		overperm(0);
+		perm_repeat(0);
 		System.out.println(sb);
-		
+
 	}//main
 	
-	private static void overperm(int count) {
-		if(count==m) {
-			for(int i=0; i<store.length; i++) {
-				sb.append(store[i]+" ");
+	public static void perm_repeat(int cnt) {
+		if(cnt==m) {
+			for(int i=0; i<numbers.length; i++) {
+				sb.append(numbers[i]+" ");
 			}
 			sb.append("\n");
+			
 			return;
 		}
 		
 		for(int i=0; i<n; i++) {
-			store[count] = arr[i];
-			overperm(count+1);
+			numbers[cnt] = arr[i];
+			perm_repeat(cnt+1);
 		}
-		
 	}
 	
 }//class
