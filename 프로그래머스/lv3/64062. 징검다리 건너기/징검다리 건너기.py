@@ -21,4 +21,4 @@ def solution(stones, k):
             left = mid+1
             answer = left
             
-    return left
+    return answer
