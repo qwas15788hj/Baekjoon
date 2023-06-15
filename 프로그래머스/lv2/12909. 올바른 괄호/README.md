@@ -1,18 +1,18 @@
 # [level 2] 올바른 괄호 - 12909 
 
-[문제 링크](https://programmers.co.kr/learn/courses/30/lessons/12909) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12909) 
 
 ### 성능 요약
 
-메모리: 10.3 MB, 시간: 9.28 ms
+메모리: 10.4 MB, 시간: 13.84 ms
 
 ### 구분
 
-코딩테스트 연습 > 연습문제
+코딩테스트 연습 > 스택／큐
 
 ### 채점결과
 
-<br/>정확성: 69.5<br/>효율성: 30.5<br/>합계: 100.0 / 100.0
+Empty
 
 ### 문제 설명
 
