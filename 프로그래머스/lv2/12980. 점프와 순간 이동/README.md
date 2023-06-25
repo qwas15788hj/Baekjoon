@@ -1,6 +1,6 @@
 # [level 2] 점프와 순간 이동 - 12980 
 
-[문제 링크](https://programmers.co.kr/learn/courses/30/lessons/12980) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12980) 
 
 ### 성능 요약
 
@@ -12,7 +12,7 @@
 
 ### 채점결과
 
-<br/>정확성: 60.0<br/>효율성: 40.0<br/>합계: 100.0 / 100.0
+Empty
 
 ### 문제 설명
 
