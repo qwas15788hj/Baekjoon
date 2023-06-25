@@ -17,5 +17,5 @@ def solution(n):
                     answer += 1
                 elif count < n:
                     break
-    
+                    
     return answer
