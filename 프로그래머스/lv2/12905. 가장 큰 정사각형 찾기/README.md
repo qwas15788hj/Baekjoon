@@ -1,10 +1,10 @@
 # [level 2] 가장 큰 정사각형 찾기 - 12905 
 
-[문제 링크](https://programmers.co.kr/learn/courses/30/lessons/12905) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12905) 
 
 ### 성능 요약
 
-메모리: 38.6 MB, 시간: 508.31 ms
+메모리: 38.6 MB, 시간: 467.19 ms
 
 ### 구분
 
@@ -12,7 +12,7 @@
 
 ### 채점결과
 
-<br/>정확성: 59.6<br/>효율성: 40.4<br/>합계: 100.0 / 100.0
+Empty
 
 ### 문제 설명
 
