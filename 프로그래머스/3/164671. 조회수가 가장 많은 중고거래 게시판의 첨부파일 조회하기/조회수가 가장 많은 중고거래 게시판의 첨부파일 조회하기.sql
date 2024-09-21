@@ -4,6 +4,6 @@ FROM USED_GOODS_FILE
 WHERE BOARD_ID IN ( SELECT BOARD_ID
                     FROM USED_GOODS_BOARD
                     WHERE VIEWS = ( SELECT MAX(VIEWS)
-                                    FROM USED_GOODS_BOARD )
+                                    FROM USED_GOODS_BOARD)
                   )
 ORDER BY FILE_ID DESC
