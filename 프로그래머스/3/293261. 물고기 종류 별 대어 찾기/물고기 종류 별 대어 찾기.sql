@@ -4,8 +4,8 @@ FROM FISH_INFO A
     JOIN FISH_NAME_INFO B
     ON A.FISH_TYPE = B.FISH_TYPE
 WHERE (B.FISH_TYPE, LENGTH) IN ( SELECT B.FISH_TYPE, MAX(LENGTH)
-                                FROM FISH_INFO A
-                                JOIN FISH_NAME_INFO B
-                                ON A.FISH_TYPE = B.FISH_TYPE
-                                GROUP BY B.FISH_TYPE )
+                                 FROM FISH_INFO A
+                                    JOIN FISH_NAME_INFO B
+                                    ON A.FISH_TYPE = B.FISH_TYPE
+                                 GROUP BY B.FISH_TYPE)
 ORDER BY A.ID
