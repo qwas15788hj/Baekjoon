@@ -1,15 +1,14 @@
-# 백준 9251
-# 최장 공통 부분수열 (LCS)
-import sys
-input = sys.stdin.readline
-s1 = input().strip()
-s2 = input().strip()
-d = [[0]*(len(s2)+1) for _ in range(len(s1)+1)]
+s1 = input()
+s2 = input()
+n = len(s1)
+m = len(s2)
 
-for i in range(1, len(s1)+1):
-    for j in range(1, len(s2)+1):
+arr = [[0] * (m+1) for _ in range(n+1)]
+for i in range(1, n+1):
+    for j in range(1, m+1):
         if s1[i-1] == s2[j-1]:
-            d[i][j] = d[i-1][j-1] + 1
+            arr[i][j] = arr[i-1][j-1] + 1
         else:
-            d[i][j] = max(d[i-1][j], d[i][j-1])
-print(d[-1][-1])
+            arr[i][j] = max(arr[i-1][j], arr[i][j-1])
+
+print(max(arr[-1]))
