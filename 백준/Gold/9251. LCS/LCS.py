@@ -1,3 +1,5 @@
+# 백준 9251
+# 최장 공통 부분수열 (LCS)
 import sys
 input = sys.stdin.readline
 s1 = input().strip()
