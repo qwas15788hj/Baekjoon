@@ -1,32 +1,36 @@
-from sys import*
-setrecursionlimit(10**6)
+import sys
+input = sys.stdin.readline
+from collections import deque
 
-def dfs(x, y):
-    dx = [-1, -1, -1, 0, 0, 1, 1, 1]
-    dy = [-1, 0, 1, -1, 1, -1, 0, 1]
-    if x < 0 or x >= h or y < 0 or y >= w:
-        return False
-    if maps[x][y] == 1:
-        maps[x][y] = 0
-        for i in range(8):
-            nx = x+dx[i]
-            ny = y+dy[i]
-            dfs(nx, ny)
-        return True
-    return False
-    
+def bfs(x, y):
+    queue = deque()
+    queue.append([x, y])
+    visited[x][y] = True
+    while queue:
+        nx, ny = queue.popleft()
+        for k in range(8):
+            mx = nx + dx[k]
+            my = ny + dy[k]
+            if 0 <= mx < h and 0 <= my < w and arr[mx][my] == 1 and not visited[mx][my]:
+                queue.append([mx, my])
+                visited[mx][my] = True
+
 while True:
     w, h = map(int, input().split())
-    if w==0 and h==0:
+    if w == 0 and h == 0:
         break
-    maps = []
-    for _ in range(h):
-        maps.append(list(map(int, input().split())))
-  
-    count = 0
+
+    arr = [list(map(int, input().split())) for _ in range(h)]
+
+    dx = [-1, -1, 0, 1, 1, 1, 0, -1]
+    dy = [0, 1, 1, 1, 0, -1, -1, -1]
+    visited = [[False] * w for _ in range(h)]
+
+    answer = 0
     for i in range(h):
         for j in range(w):
-            if maps[i][j] == 1:
-                dfs(i, j)
-                count += 1
-    print(count)
+            if arr[i][j] == 1 and not visited[i][j]:
+                bfs(i, j)
+                answer += 1
+
+    print(answer)
