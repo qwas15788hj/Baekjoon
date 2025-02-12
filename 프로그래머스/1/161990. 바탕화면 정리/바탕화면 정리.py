@@ -1,0 +1,17 @@
+def solution(wallpaper):
+    answer = [1e9, 1e9, -1, -1]
+    n = len(wallpaper)
+    m = len(wallpaper[0])
+    
+    for i in range(n):
+        for j in range(m):
+            if wallpaper[i][j] == "#":
+                answer[0] = min(answer[0], i)
+                answer[1] = min(answer[1], j)
+                answer[2] = max(answer[2], i)
+                answer[3] = max(answer[3], j)
+    
+    answer[2] += 1
+    answer[3] += 1
+                
+    return answer
