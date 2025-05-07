@@ -1,25 +1,17 @@
+import sys
+input = sys.stdin.readline
+
 n = int(input())
 arr = list(map(int, input().split()))
 
-odd, even = [], []
+odd, odd_cnt = 0, 0
+even, even_cnt = 0, 0
 for i in range(n):
     if arr[i] % 2 != 0:
-        odd.append(i)
+        odd += abs(i-odd_cnt)
+        odd_cnt += 1
     else:
-        even.append(i)
+        even += abs(i-even_cnt)
+        even_cnt += 1
 
-if n <= 2 or len(odd) == n or len(even) == n:
-    print(0)
-else:
-    answer = 1e9
-    count = 0
-    for i in range(len(odd)):
-        count += abs(odd[i]-i)
-    answer = min(answer, count)
-
-    count = 0
-    for i in range(len(even)):
-        count += abs(even[i]-i)
-    answer = min(answer, count)
-
-    print(answer)
+print(min(odd, even))
