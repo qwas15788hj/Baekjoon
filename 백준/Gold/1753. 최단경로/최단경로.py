@@ -1,31 +1,30 @@
-import sys, heapq
+import sys
 input = sys.stdin.readline
+from heapq import heappush, heappop
 
-INF = int(1e9)
-V, E = map(int, input().split())
-K = int(input())
-graph = [[] for _ in range(V+1)]
-distance = [INF]*(V+1)
+v, e = map(int, input().split())
+k = int(input())
+arr = [[] for _ in range(v+1)]
+for _ in range(e):
+    a, b, c = map(int, input().split())
+    arr[a].append([b, c])
 
-for _ in range(E):
-    u, v, w = map(int, input().split())
-    graph[u].append((v, w))
-    
 queue = []
-heapq.heappush(queue, (0, K))
-distance[K] = 0
+heappush(queue, [0, k])
+visited = [1e9] * (v+1)
+visited[k] = 0
 while queue:
-    dist, now = heapq.heappop(queue)
-    if distance[now] < dist:
+    d, x = heappop(queue)
+    if visited[x] < d:
         continue
-    for i in graph[now]:
-        cost = dist + i[1]
-        if cost < distance[i[0]]:
-            distance[i[0]] = cost
-            heapq.heappush(queue, (cost, i[0]))
-            
-for i in range(1, V+1):
-    if distance[i] == INF:
+
+    for nx, nd in arr[x]:
+        if visited[nx] > d + nd:
+            visited[nx] = d + nd
+            heappush(queue, [d+nd, nx])
+
+for i in range(1, v+1):
+    if visited[i] == 1e9:
         print("INF")
     else:
-        print(distance[i])
+        print(visited[i])
