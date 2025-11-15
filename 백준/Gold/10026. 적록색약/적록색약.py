@@ -1,47 +1,44 @@
-import sys
-input = sys.stdin.readline
 from collections import deque
 
 n = int(input())
-arr = []
-for _ in range(n):
-    arr.append(list(input()))
+arr = [list(input()) for _ in range(n)]
 
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-def bfs(x, y):
+def bfs(a, b):
     queue = deque()
-    queue.append([x, y])
-    visited[x][y] = True
-    while queue:
-        nx, ny = queue.popleft()
-        for i in range(4):
-            mx = nx + dx[i]
-            my = ny + dy[i]
-            if 0 <= mx < n and 0 <= my < n and arr[x][y] == arr[mx][my] and not visited[mx][my]:
-                visited[mx][my] = True
-                queue.append([mx, my])
+    queue.append([a, b])
+    visited[a][b] = True
 
-answer = 0
+    while queue:
+        x, y = queue.popleft()
+        for k in range(4):
+            nx = x + dx[k]
+            ny = y + dy[k]
+            if 0 <= nx < n and 0 <= ny < n and not visited[nx][ny] and arr[nx][ny] == arr[a][b]:
+                queue.append([nx, ny])
+                visited[nx][ny] = True
+
 visited = [[False] * n for _ in range(n)]
+answer1 = 0
 for i in range(n):
     for j in range(n):
         if not visited[i][j]:
             bfs(i, j)
-            answer += 1
+            answer1 += 1
 
 for i in range(n):
     for j in range(n):
         if arr[i][j] == "G":
             arr[i][j] = "R"
 
-answer_rg = 0
 visited = [[False] * n for _ in range(n)]
+answer2 = 0
 for i in range(n):
     for j in range(n):
         if not visited[i][j]:
             bfs(i, j)
-            answer_rg += 1
+            answer2 += 1
 
-print(answer, answer_rg)
+print(answer1, answer2)
