@@ -25,12 +25,12 @@ while queue:
     elif x < n:
         for nx in arr[x]:
             if visited_tube[nx] == 0:
-                visited_tube[nx] = x
+                visited_tube[nx] = visited_station[x]
                 queue.append(nx)
     else:
         for nx in arr[x]:
             if visited_station[nx] == 0:
-                visited_station[nx] = visited_station[visited_tube[x]] + 1
+                visited_station[nx] = visited_tube[x] + 1
                 queue.append(nx)
 
 if visited_station[n] == 0:
