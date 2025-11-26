@@ -2,10 +2,11 @@ from itertools import combinations
 
 while True:
     arr = list(map(int, input().split()))
-    k = arr[0]
-    if k == 0:
+    if arr[0] == 0:
         break
-    answer = list(combinations(sorted(arr[1:]), 6))
-    for i in answer:
-        print(*i)
+
+    n = arr[0]
+    comb = list(combinations(arr[1:], 6))
+    for com in comb:
+        print(*com)
     print()
