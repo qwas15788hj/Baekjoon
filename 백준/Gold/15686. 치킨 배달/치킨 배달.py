@@ -1,29 +1,25 @@
-import sys
-input = sys.stdin.readline
 from itertools import combinations
 
 n, m = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(n)]
 
-houses = []
+house = []
 chicken = []
 for i in range(n):
     for j in range(n):
         if arr[i][j] == 1:
-            houses.append([i, j])
+            house.append([i, j])
         if arr[i][j] == 2:
             chicken.append([i, j])
 
-chicken_comb = list(combinations(chicken, m))
 answer = 1e9
-for combs in chicken_comb:
-    distance = 0
-    for house in houses:
-        dist = 1e9
-        for comb in combs:
-            dist = min(dist, abs(house[0]-comb[0]) + abs(house[1]-comb[1]))
-        distance += dist
-
-    answer = min(answer, distance)
+for comb in list(combinations(chicken, m)):
+    result = 0
+    for h in house:
+        check = 1e9
+        for c in comb:
+            check = min(check, abs(h[0]-c[0])+abs(h[1]-c[1]))
+        result += check
+    answer = min(answer, result)
 
 print(answer)
