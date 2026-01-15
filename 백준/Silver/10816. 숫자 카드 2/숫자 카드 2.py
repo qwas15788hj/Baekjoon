@@ -1,17 +1,47 @@
-import sys, math
-from bisect import bisect_left, bisect_right
+import sys
+input = sys.stdin.readline
 
-n = int(sys.stdin.readline())
-n_list = list(map(int, sys.stdin.readline().split()))
-n_list.sort()
+n = int(input())
+arr1 = list(map(int, input().split()))
+m = int(input())
+arr2 = list(map(int, input().split()))
 
-m = int(sys.stdin.readline())
-m_list = list(map(int, sys.stdin.readline().split()))
-
-def count_by_range(n_list, left_value, right_value):
-    right_index = bisect_right(n_list, right_value)
-    left_index = bisect_left(n_list, left_value)
-    return right_index - left_index
-
+arr1.sort()
+answer = []
 for i in range(m):
-    print(count_by_range(n_list, m_list[i], m_list[i]), end=" ")
+    right = -1
+    start, end = 0, n
+    while start <= end:
+        mid = (start+end)//2
+        if mid >= n:
+            break
+
+        if arr1[mid] == arr2[i]:
+            right = mid
+            start = mid + 1
+        if arr1[mid] < arr2[i]:
+            start = mid + 1
+        if arr1[mid] > arr2[i]:
+            end = mid - 1
+
+    left = -1
+    start, end = 0, n
+    while start <= end:
+        mid = (start+end)//2
+        if mid >= n:
+            break
+
+        if arr1[mid] == arr2[i]:
+            left = mid
+            end = mid - 1
+        if arr1[mid] < arr2[i]:
+            start = mid + 1
+        if arr1[mid] > arr2[i]:
+            end = mid - 1
+
+    if left != -1:
+        answer.append(right - left + 1)
+    else:
+        answer.append(0)
+
+print(*answer)
