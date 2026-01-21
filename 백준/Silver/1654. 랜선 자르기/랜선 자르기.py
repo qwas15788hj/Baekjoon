@@ -1,23 +1,25 @@
 import sys
+input = sys.stdin.readline
 
-k, n = map(int, sys.stdin.readline().split())
-array = []
+k, n = map(int, input().split())
+arr = []
 for _ in range(k):
-    array.append(int(sys.stdin.readline()))
-    
-start = 1
-end = max(array)
+    arr.append(int(input()))
+arr.sort()
 
-result = 0
-while start<=end:
-    total = 0
-    mid = (start+end) // 2
-    for i in array:
+start = 1
+end = max(arr)
+answer = 0
+while start <= end:
+    count = 0
+    mid = (start+end)//2
+    for i in arr:
         if i >= mid:
-            total += i//mid
-    if total < n:
-        end = mid - 1
+            count += i//mid
+            
+    if count < n:
+        end = mid-1
     else:
-        start = mid + 1
-        result = mid
-print(result)
+        answer = mid
+        start = mid+1
+print(answer)
