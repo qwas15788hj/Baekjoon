@@ -1,18 +1,14 @@
-import heapq
+from heapq import heappush, heappop
 
 n = int(input())
-heap = []
-
+arr = []
 for _ in range(n):
-    data = int(input())
-    heapq.heappush(heap, data)
+    heappush(arr, int(input()))
 
-result = 0
+answer = 0
+while len(arr) != 1:
+    card = heappop(arr) + heappop(arr)
+    answer += card
+    heappush(arr, card)
 
-while len(heap) != 1:
-    one = heapq.heappop(heap)
-    two = heapq.heappop(heap)
-    sum_value = one + two
-    result += sum_value
-    heapq.heappush(heap, sum_value)
-print(result)
+print(answer)
