@@ -1,78 +1,81 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	
-	static int n, m;
-	static int[][] arr;
-	static int[] dx = {-1, 0, 1, 0};
-	static int[] dy = {0, 1, 0, -1}; //북동남서
-	static int answer;
-	public static void main(String[] args) throws IOException {
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		n = Integer.parseInt(st.nextToken());
-		m = Integer.parseInt(st.nextToken());
-		st = new StringTokenizer(br.readLine());
-		int r = Integer.parseInt(st.nextToken());
-		int c = Integer.parseInt(st.nextToken());
-		int direction = Integer.parseInt(st.nextToken());
-		arr = new int[n][m];
-		for(int i=0; i<n; i++) {
-			st = new StringTokenizer(br.readLine());
-			for(int j=0; j<m; j++) {
-				arr[i][j] = Integer.parseInt(st.nextToken());
-			}
-		}
-		
-		answer = 0;
-		clean(r, c, direction);
-		
-		System.out.println(answer);
-		
-	}//main
-	
-	public static void clean(int x, int y, int dir) {
-		
-		//1. 현재 위치 청소
-		if(arr[x][y]==0) {
-			arr[x][y] = 2;
-			answer += 1;
-		}
-		
-		boolean flag = false;
-		for(int i=0; i<4; i++) { //4방향 탐색
-			int next_dir = (dir+3)%4; //왼쪽 방향
-			int next_x = x+dx[next_dir]; //왼쪽 방향 세로 값
-			int next_y = y+dy[next_dir]; //왼쪽 방향 가로 값
-			if(next_x>=0 && next_x<n && next_y>=0 && next_y<m) { //왼쪽 방향이 범위에 있고
-				if(arr[next_x][next_y]==0) { //왼쪽 방향이 청소할 수 있다면
-					clean(next_x, next_y, next_dir); //청소하러 가자
-					flag = true;
-					break;
-				}
-			}
-			dir = (dir+3)%4; //방향만 변경
-		}
-		
-		//4방향 모두 없으면
-		if(!flag) {
-			int next_dir = (dir+2)%4; //그대로 뒤로 이동하기 위한 방향 설정
-			int next_x = x+dx[next_dir];
-			int next_y = y+dy[next_dir];
-			if(next_x>=0 && next_x<n && next_y>=0 && next_y<m) { //뒤방향이 범위 안에 있고
-				if(arr[next_x][next_y]!=1) { //벽이 아니면
-					clean(next_x, next_y, dir); //청소하러 가자
-				}
-			} else { //범위 벗어나면
-				return; //끝
-			}
-		}
-		
-	}
 
-}//class
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+    static StringBuffer sb = new StringBuffer();
+    static int n, m, r, c, d, answer;
+    static int[][] arr;
+    static boolean[][] visited;
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
+    static boolean flag = true;
+
+    public static void main(String[] args) throws IOException {
+
+        st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
+        r = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
+        d = Integer.parseInt(st.nextToken());
+        arr = new int[n][m];
+        visited = new boolean[n][m];
+        for(int i=0; i<n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for(int j=0; j<m; j++) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        answer = 0;
+        while(flag) {
+            // 1. 현재 칸이 아직 청소되지 않은 경우, 현재 칸 청소
+            if(arr[r][c] == 0 && !visited[r][c]) {
+                visited[r][c] = true;
+                answer += 1;
+            }
+
+            // 주변 4칸 청소되어 있는지 체크
+            boolean check = true;
+            for(int k=0; k<4; k++) {
+                int nx = r + dx[k];
+                int ny = c + dy[k];
+                if(0 <= nx && nx < n && 0 <= ny && ny < m && arr[nx][ny] == 0 && !visited[nx][ny]) {
+                    check = false;
+                    break;
+                }
+            }
+
+            // 2. 현재 칸의 주변 4칸 중 청소되지 않은 빈 칸이 없는 경우,
+            if(check) {
+                int nd = (d+2)%4;
+                int nx = r + dx[nd];
+                int ny = c + dy[nd];
+                // 2-1. 바라보는 방향을 유지한 채로 한 칸 후진할 수 있다면 한 칸 후진하고 1번으로 돌아간다.
+                if(0 <= nx && nx < n && 0 <= ny && ny < m && arr[nx][ny] == 0) {
+                    r = nx;
+                    c = ny;
+                } else { // 2-2. 바라보는 방향의 뒤쪽 칸이 벽이라 후진할 수 없다면 작동을 멈춘다.
+                    flag = false;
+                    break;
+                }
+            } else { // 3 .현재 칸의 주변 4칸 중 청소되지 않은 빈 칸이 있는 경우,
+                d = (d+3)%4; // 3-1. 반시계 방향으로 90도 회전한다.
+                int nx = r + dx[d];
+                int ny = c + dy[d];
+                // 3-2. 바라보는 방향을 기준으로 앞쪽 칸이 청소되지 않은 빈 칸인 경우 한 칸 전진한다.
+                if(0 <= nx && nx < n && 0 <= ny && ny < m && arr[nx][ny] == 0 && !visited[nx][ny]) {
+                    r = nx;
+                    c = ny;
+                }
+            }
+
+        }
+
+        System.out.println(answer);
+    }
+}
