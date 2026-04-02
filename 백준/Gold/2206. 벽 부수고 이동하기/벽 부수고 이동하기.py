@@ -19,7 +19,7 @@ while queue:
             if arr[nx][ny] == '0' and visited[nx][ny][c] == -1:
                 queue.append([nx, ny, c])
                 visited[nx][ny][c] = visited[x][y][c] + 1
-            if arr[nx][ny] == '1' and c == 0 and visited[nx][ny][1] == -1:
+            if arr[nx][ny] == '1' and c == 0:
                 queue.append([nx, ny, 1])
                 visited[nx][ny][1] = visited[x][y][0] + 1
 
