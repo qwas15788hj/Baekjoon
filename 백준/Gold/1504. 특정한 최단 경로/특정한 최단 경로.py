@@ -1,43 +1,39 @@
-import sys
-input = sys.stdin.readline
+from heapq import heappush, heappop
 
-import heapq
-
-n, m = map(int, input().split())
-INF = 1e9
-graph = [[] for _ in range(n+1)]
-
-for _ in range(m):
+n, e = map(int, input().split())
+arr = [[] for _ in range(n+1)]
+for _ in range(e):
     a, b, c = map(int, input().split())
-    graph[a].append((b, c)) # 정점, 거리
-    graph[b].append((a, c))
+    arr[a].append([b, c])
+    arr[b].append([a, c])
+u, v = map(int, input().split())
 
-def dijkstra(start):
-    distance = [INF]*(n+1)
+def dijkstra(s):
     heap = []
-    heapq.heappush(heap, (start, 0))
-    distance[start] = 0
+    heappush(heap, [0, s])
+    visited = [1e9] * (n+1)
+    visited[s] = 0
     while heap:
-        now, dist = heapq.heappop(heap)
-        if distance[now] < dist:
+        c, x = heappop(heap)
+        if visited[x] < c:
             continue
-        for i in graph[now]:
-            cost = dist+i[1]
-            if cost < distance[i[0]]:
-                distance[i[0]] = cost
-                heapq.heappush(heap, (i[0], cost))
+        for nx, nc in arr[x]:
+            if visited[nx] > c + nc:
+                visited[nx] = c + nc
+                heappush(heap, [c + nc, nx])
 
-    return distance
+    return visited
 
+d1, du, dv = dijkstra(1), dijkstra(u), dijkstra(v)
 
-v1, v2 = map(int, input().split())
+r1 = d1[u] + du[v] + dv[n]
+r2 = d1[v] + dv[u] + du[n]
 
-one_dis = dijkstra(1)
-v1_dis = dijkstra(v1)
-v2_dis = dijkstra(v2)
-
-answer = min(one_dis[v1] + v1_dis[v2] + v2_dis[n], one_dis[v2] + v2_dis[v1] + v1_dis[n])
-if answer >= INF:
+if r1 >= 1e9 and r2 >= 1e9:
     print(-1)
+elif r1 < 1e9 and r2 >= 1e9:
+    print(r1)
+elif r1 >= 1e9 and r2 < 1e9:
+    print(r2)
 else:
-    print(answer)
+    print(min(r1, r2))
