@@ -1,62 +1,107 @@
 n, k = map(int, input().split())
 arr = [list(map(int, input().split())) for _ in range(n)]
+visited = [[[] for _ in range(n)] for _ in range(n)]
 piece = []
-loca = [[[] for _ in range(n)] for _ in range(n)] # 위치 배열
 for i in range(k):
-    a, b, d = map(int, input().split())
-    piece.append([a-1, b-1, d-1])
-    loca[a-1][b-1] = [i]
+    a, b, c = map(int, input().split())
+    piece.append([a-1, b-1, c-1])
+    visited[a-1][b-1].append(i)
 
 dx = [0, 0, -1, 1]
 dy = [1, -1, 0, 0]
 
-answer = 0
+def check(a, b):
+    if len(visited[a][b]) >= 4:
+        return True
+    return False
+
+answer = 1
 flag = False
-# 1000번 이상 진행
-for _ in range(1001):
-    for i in range(len(piece)):
+# 1000번 이하만 돌리기
+for _ in range(1000):
+    # 한 턴 시작
+    for i in range(k):
         x, y, d = piece[i]
+        # 다음 위치
         nx = x + dx[d]
         ny = y + dy[d]
 
-        # 파란색이거나 밖이면
-        if not (0 <= nx < n and 0 <= ny < n) or arr[nx][ny] == 2:
-            # 방향 조절
-            if d%2 == 0:
-                d += 1
-            else:
+        # for v in visited:
+        #     print(v)
+        # print(piece)
+    
+        # 이동X, 이동하는 말
+        idx = visited[x][y].index(i)
+        no_move = visited[x][y][:idx]
+        move = visited[x][y][idx:]
+        # print(move)
+        # print("====")
+        
+        # 다음 이동하려는 칸이 흰색인 경우
+        if 0 <= nx < n and 0 <= ny < n and arr[nx][ny] == 0:
+            visited[x][y] = no_move
+            visited[nx][ny] += move
+            for m in move:
+                piece[m][0] = nx
+                piece[m][1] = ny
+            if check(nx, ny):
+                flag = True
+                break
+                
+        # 다음 이동하려는 칸이 빨간색일 경우
+        elif 0 <= nx < n and 0 <= ny < n and arr[nx][ny] == 1:
+            visited[x][y] = no_move
+            visited[nx][ny] += move[::-1]
+            for m in move:
+                piece[m][0] = nx
+                piece[m][1] = ny
+            if check(nx, ny):
+                flag = True
+                break
+                
+        # 다음 이동하려는 칸이 파랑색이거나, 벗어나는 경우
+        else:
+            # 방향을 반대로 변경
+            if d%2 != 0:
                 d -= 1
-            piece[i][2] = d
+            else:
+                d += 1
+            piece[i] = [x, y, d]
+            
             nx = x + dx[d]
             ny = y + dy[d]
-            # 반대도 파랑색이거나 밖인 경우 중단
-            if not (0 <= nx < n and 0 <= ny < n) or arr[nx][ny] == 2:
-                continue
+            # 다음 이동하려는 칸이 흰색인 경우
+            if 0 <= nx < n and 0 <= ny < n and arr[nx][ny] == 0:
+                visited[x][y] = no_move
+                visited[nx][ny] += move
+                for m in move:
+                    piece[m][0] = nx
+                    piece[m][1] = ny
+                if check(nx, ny):
+                    flag = True
+                    break
+                
+            # 다음 이동하려는 칸이 빨간색일 경우
+            elif 0 <= nx < n and 0 <= ny < n and arr[nx][ny] == 1:
+                visited[x][y] = no_move
+                visited[nx][ny] += move[::-1]
+                for m in move:
+                    piece[m][0] = nx
+                    piece[m][1] = ny
+                if check(nx, ny):
+                    flag = True
+                    break
 
-        # 움직이는 말 체크
-        idx = loca[x][y].index(i)
-        move = loca[x][y][idx:]
-        loca[x][y] = loca[x][y][:idx] # 현재 칸 제거
-
-        if arr[nx][ny] == 0: # 흰색
-            loca[nx][ny] += move
-        elif arr[nx][ny] == 1: # 빨간색
-            loca[nx][ny] += move[::-1]
-
-        # 이동한 말 모두 위치 변경
-        for m in move:
-            piece[m][0], piece[m][1] = nx, ny
-
-        if len(loca[nx][ny]) >= 4:
-            flag = True
+        if flag:
             break
-
-    answer += 1
-
+            
     if flag:
         break
+        
+    answer += 1
 
-if flag:
-    print(answer)
-else:
+if answer > 1000:
     print(-1)
+else:
+    print(answer)
+        

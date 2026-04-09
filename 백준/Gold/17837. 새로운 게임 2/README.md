@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 32412 KB, 시간: 52 ms
+메모리: 32412 KB, 시간: 64 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2026년 1월 18일 19:20:25
+2026년 4월 9일 17:46:20
 
 ### 문제 설명
 
@@ -55,8 +55,8 @@
 		<tr>
 			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/46796304-b486-4420-9d2c-ea49e2d5665b/-/preview/" style="width: 250px; height: 251px;"></td>
 			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/04643ced-fdfd-46f5-a07e-374704dbb1c5/-/preview/" style="width: 250px; height: 252px;"></td>
-			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/46f4bfab-841b-41c8-842e-56027816f846/-/preview/" style="width: 250px; height: 251px;"></td>
-			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/fcccf76c-9431-4ff5-8a05-7dbd2feff142/-/preview/" style="width: 250px; height: 251px;"></td>
+			<td style="width: 25%; text-align: center;"><img alt="" src="" style="width: 250px; height: 251px;"></td>
+			<td style="width: 25%; text-align: center;"><img alt="" src="" style="width: 250px; height: 251px;"></td>
 		</tr>
 	</tbody>
 </table>
@@ -68,10 +68,10 @@
 <table class="table table-bordered" style="width: 100%;">
 	<tbody>
 		<tr>
-			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/36568153-8c2a-4fe9-b45f-72036c97f5aa/-/preview/" style="width: 250px; height: 252px;"></td>
-			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/babead43-4acc-425d-917a-54dcc6f45414/-/preview/" style="width: 250px; height: 251px;"></td>
-			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/1edd5ed8-0f4c-4c6d-b304-3b7642f42c6f/-/preview/" style="width: 250px; height: 251px;"></td>
-			<td style="width: 25%; text-align: center;"><img alt="" src="https://upload.acmicpc.net/028a5dd2-5524-4475-8439-9e7794e28ee4/-/preview/" style="width: 250px; height: 252px;"></td>
+			<td style="width: 25%; text-align: center;"><img alt="" src="" style="width: 250px; height: 252px;"></td>
+			<td style="width: 25%; text-align: center;"><img alt="" src="" style="width: 250px; height: 251px;"></td>
+			<td style="width: 25%; text-align: center;"><img alt="" src="" style="width: 250px; height: 251px;"></td>
+			<td style="width: 25%; text-align: center;"><img alt="" src="" style="width: 250px; height: 252px;"></td>
 		</tr>
 	</tbody>
 </table>
