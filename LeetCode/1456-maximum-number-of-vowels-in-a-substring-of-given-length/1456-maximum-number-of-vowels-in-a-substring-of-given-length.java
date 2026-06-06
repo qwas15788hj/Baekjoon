@@ -13,7 +13,6 @@ class Solution {
                 }   
             }
         }
-        System.out.println(answer + " " + count);
 
         for(int i=k; i<n; i++) {
             for(int j=0; j<5; j++) {
