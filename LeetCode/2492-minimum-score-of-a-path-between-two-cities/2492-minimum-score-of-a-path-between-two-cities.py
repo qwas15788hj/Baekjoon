@@ -6,20 +6,19 @@ class Solution:
         for a, b, c in roads:
             arr[a].append([b, c])
             arr[b].append([a, c])
-        
-        visited = [0] * (n+1)
+
+        queue = deque([1])
+        visited = [False] * (n+1)
+        visited[1] = True
         dic = dict()
-        group = 1
-        
-        queue = deque([group])
-        visited[group] = group
-        dic[group] = 1e9
+        dic[1] = 1e9
+
         while queue:
             x = queue.popleft()
-            for nx, d in arr[x]:
-                dic[group] = min(dic[group], d)
-                if visited[nx] == 0:
+            for nx, nd in arr[x]:
+                dic[1] = min(dic[1], nd)
+                if not visited[nx]:
                     queue.append(nx)
-                    visited[nx] = group
-        
+                    visited[nx] = True
+                    
         return dic[1]
