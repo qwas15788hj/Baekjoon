@@ -21,7 +21,5 @@ class Solution:
                 if 0 <= nx < n and 0 <= ny < m:
                     nc = max(c, abs(heights[x][y] - heights[nx][ny]))
                     if visited[nx][ny] > nc:
-                        heappush(heap, [nc, nx, ny])
                         visited[nx][ny] = nc
-        
-        return -1
+                        heappush(heap, [nc, nx, ny])
