@@ -21,7 +21,7 @@ class Solution:
                     if grid[nx][ny] == 0 and visited[nx][ny][c] == -1:
                         queue.append([nx, ny, c])
                         visited[nx][ny][c] = visited[x][y][c] + 1
-                    if grid[nx][ny] == 1 and (c+1) < (k+1) and visited[nx][ny][c+1] == -1:
+                    if grid[nx][ny] == 1 and c+1 <= k and visited[nx][ny][c+1] == -1:
                         queue.append([nx, ny, c+1])
                         visited[nx][ny][c+1] = visited[x][y][c] + 1
         
