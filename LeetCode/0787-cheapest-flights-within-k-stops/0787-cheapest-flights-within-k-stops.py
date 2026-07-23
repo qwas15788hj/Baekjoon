@@ -1,4 +1,4 @@
-from collections import deque
+from heapq import heappush, heappop
 
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
@@ -6,22 +6,22 @@ class Solution:
         for a, b, c in flights:
             arr[a].append([b, c])
         
-        queue = deque([[src, 0]])
-        visited = [1e9] * n
-        visited[src] = 0
-        flag = 0
-        while queue and flag <= k:
-            size = len(queue)
-            for _ in range(size):
-                x, c = queue.popleft()
-                for nx, nc in arr[x]:
-                    cost = c + nc
-                    if cost < visited[nx]:
-                        queue.append([nx, cost])
-                        visited[nx] = cost
-            flag += 1
+        heap = []
+        heappush(heap, [0, src, 0])
+        visited = [1e9] * (n) # 해당 노드에 몇 번의 경유가 있었는지 체크
+        while heap:
+            cost, x, cnt = heappop(heap)
+            if x == dst:
+                return cost
+            
+            if cnt >= visited[x]:
+                continue
+            
+            visited[x] = cnt
+            if cnt > k:
+                continue
+            
+            for nx, nc in arr[x]:
+                heappush(heap, [cost+nc, nx, cnt+1])
         
-        if visited[dst] == 1e9:
-            return -1
-        else:
-            return visited[dst]
+        return -1
