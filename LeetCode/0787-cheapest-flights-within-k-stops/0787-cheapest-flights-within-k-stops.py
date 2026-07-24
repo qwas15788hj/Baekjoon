@@ -20,11 +20,11 @@ class Solution:
                 for nx, nc in arr[x]:
                     cost = c + nc
                     if visited[nx] >= cost:
-                        queue.append([nx, cost])
                         visited[nx] = cost
+                        queue.append([nx, cost])
             
             cnt += 1
-
+        
         if visited[dst] == 1e9:
             return -1
         else:
