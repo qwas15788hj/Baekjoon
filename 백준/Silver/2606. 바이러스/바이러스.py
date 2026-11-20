@@ -1,24 +1,25 @@
+from collections import deque
+
 n = int(input())
 m = int(input())
-graph = [[] for _ in range(n+1)]
-visited = [False]*(n+1)
-
+arr = [[] for _ in range(n+1)]
 for _ in range(m):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    arr[a].append(b)
+    arr[b].append(a)
 
-for i in range(n+1):
-    graph[i].sort()
+queue = deque([1])
+visited = [False] * (n+1)
+while queue:
+    x = queue.popleft()
+    for nx in arr[x]:
+        if not visited[nx]:
+            queue.append(nx)
+            visited[nx] = True
 
-count = 0
-def dfs(v):
-    visited[v] = True
-    global count
-    count += 1
-    for i in graph[v]:
-        if not visited[i]:
-            dfs(i)
+answer = 0
+for i in range(2, n+1):
+    if visited[i]:
+        answer += 1
 
-dfs(1)
-print(count-1)
+print(answer)
